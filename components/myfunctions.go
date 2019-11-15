@@ -1,8 +1,12 @@
-package functions
+package components
 
-import (
-	"../constants"
-	"fmt"
+import "fmt"
+
+
+const (
+	lettersNum         = 26
+	maxLettersOneRow   = 702
+	unicodeLetterStart = 65
 )
 
 func GetSpreadsheetNotation(n uint64) (result string) {
@@ -41,15 +45,15 @@ func GetSpreadsheetNotation(n uint64) (result string) {
 		26: "Z",
 	}
 
-	rowNum = n / constants.MaxLettersOneRow
+	rowNum = n / maxLettersOneRow
 	result += fmt.Sprintf("%d", rowNum+1)
-	colNum = n - (rowNum * constants.MaxLettersOneRow)
+	colNum = n - (rowNum * maxLettersOneRow)
 
-	if colNum <= constants.LettersNum {
+	if colNum <= lettersNum {
 		result += letters[colNum]
 	} else {
-		firstLetterNum := colNum / constants.LettersNum
-		lastLetterNum := colNum - firstLetterNum * constants.LettersNum
+		firstLetterNum := colNum / lettersNum
+		lastLetterNum := colNum - firstLetterNum * lettersNum
 		result += letters[firstLetterNum] + letters[lastLetterNum]
 	}
 
@@ -62,16 +66,16 @@ func GetSpreadsheetNotation2(n uint64) (result string) {
 		colNum uint64
 	)
 
-	rowNum = n / constants.MaxLettersOneRow
+	rowNum = n / maxLettersOneRow
 	result += fmt.Sprintf("%d", rowNum+1)
-	colNum = n - (rowNum * constants.MaxLettersOneRow)
+	colNum = n - (rowNum * maxLettersOneRow)
 
-	if colNum <= constants.LettersNum {
-		result += string(constants.UnicodeLetterStart + colNum - 1)
+	if colNum <= lettersNum {
+		result += string(unicodeLetterStart + colNum - 1)
 	} else {
-		firstLetterNum := (colNum / constants.LettersNum) - 1
-		lastLetterNum := colNum - ((firstLetterNum + 1) * constants.LettersNum)
-		result += string(constants.UnicodeLetterStart + firstLetterNum) + string(constants.UnicodeLetterStart + lastLetterNum)
+		firstLetterNum := (colNum / lettersNum) - 1
+		lastLetterNum := colNum - ((firstLetterNum + 1) * lettersNum)
+		result += string(unicodeLetterStart + firstLetterNum) + string(unicodeLetterStart + lastLetterNum)
 	}
 
 	return result
