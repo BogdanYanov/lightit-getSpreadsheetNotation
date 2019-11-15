@@ -29,9 +29,48 @@ Output: 1AA
 Input: 1405
 Output: 3A
 
-# About programm
+# How run the programm
 
-This program contains two functions that have a different structure, but lead to the same result.
-Function **getSpreadsheetNotation()** contains a map of numbers that associate them with letters. 
+Type in project directory:
+```
+go run main.go
+```
+On display you will be see the next message:
+```
+GetSpreadsheetNotation took 58.502796ms
+GetSpreadsheetNotation2 took 5.168334ms
+```
+This is the time during which these two functions calculate the cell by the number from 1 to 10000
 
-Function **getSpreadsheetNotation2()** works with unicode table.
+## Tests
+
+If you go to the folder **components/** you can start the test. 
+
+**Test pairs**
+
+- 1 must return "1A"
+- 26 must return "1Z"
+- 27 must return "1AA"
+- 52 must return "1AZ"
+- 53 must return "1BA"
+- 702 must return "1ZZ"
+- 1405 must return "3A"
+- 1430 must return "3Z"
+- 1431 must return "3AA"
+
+```
+~.../components$ go test
+PASS
+ok      github.com/BogdanYanov/lightit-getSpreadsheetNotation/components        0.004s
+```
+
+```
+~.../components$ go test -bench=.
+goos: linux
+goarch: amd64
+pkg: github.com/BogdanYanov/lightit-getSpreadsheetNotation/components
+BenchmarkGetSpreadsheetNotation-2         290673              4064 ns/op
+BenchmarkGetSpreadsheetNotation2-2       2340072               505 ns/op
+PASS
+ok      github.com/BogdanYanov/lightit-getSpreadsheetNotation/components        3.881s
+```
