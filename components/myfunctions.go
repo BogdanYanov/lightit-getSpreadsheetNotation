@@ -96,3 +96,36 @@ func GetSpreadsheetNotation2(n uint64) (result string) {
 	return result
 }
 
+func GetSpreadsheetNotationFor(n uint64) (result string) {
+	var rowNum uint64
+
+	rowNum = n / maxLettersOneRow
+	if n % maxLettersOneRow == 0 {
+		rowNum -= 1
+	}
+
+	n -= rowNum * maxLettersOneRow
+
+	for n > 0 {
+		rem := n%lettersNum
+		if rem == 0 {
+			result += string(unicodeLetterStart + lettersNum - 1)
+			n = (n / 26) - 1
+		} else {
+			result += string(unicodeLetterStart + rem - 1)
+			n = n / 26
+		}
+	}
+	result += fmt.Sprintf("%d", rowNum + 1)
+	result = reverse(result)
+	return
+}
+
+func reverse(s string) string {
+	runes := []rune(s)
+	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
+		runes[i], runes[j] = runes[j], runes[i]
+	}
+	return string(runes)
+}
+

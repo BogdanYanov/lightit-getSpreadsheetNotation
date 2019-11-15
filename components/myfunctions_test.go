@@ -45,6 +45,19 @@ func TestGetSpreadsheetNotation2(t *testing.T) {
 	}
 }
 
+func TestGetSpreadsheetNotationFor(t *testing.T) {
+	for _, pair := range tests {
+		v := GetSpreadsheetNotationFor(pair.value)
+		if v != pair.result {
+			t.Error(
+				"For", pair.value,
+				"expected", pair.result,
+				"got", v,
+				)
+		}
+	}
+}
+
 func BenchmarkGetSpreadsheetNotation(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		GetSpreadsheetNotation(702)
@@ -54,5 +67,11 @@ func BenchmarkGetSpreadsheetNotation(b *testing.B) {
 func BenchmarkGetSpreadsheetNotation2(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		GetSpreadsheetNotation2(702)
+	}
+}
+
+func BenchmarkGetSpreadsheetNotationFor(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		GetSpreadsheetNotationFor(702)
 	}
 }
