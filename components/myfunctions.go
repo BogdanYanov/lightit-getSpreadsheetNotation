@@ -3,11 +3,12 @@ package components
 import "fmt"
 
 const (
-	lettersNum         = 26
-	maxLettersOneRow   = 702
-	unicodeLetterStart = 65
+	lettersNum         = 26		// number of letters in alphabet
+	maxLettersOneRow   = 702	// max number of columns per pow
+	unicodeLetterStart = 65		// starting position of the letter 'A' in the unicode table
 )
 
+// GetSpreadsheetNotation return a string representation of a cell number is spreadsheet notation by map of alphabet
 func GetSpreadsheetNotation(n uint64) (result string) {
 	var (
 		letters map[uint64]string
@@ -44,9 +45,17 @@ func GetSpreadsheetNotation(n uint64) (result string) {
 		26: "Z",
 	}
 
-	rowNum = n / maxLettersOneRow
+	rowNum = n / (maxLettersOneRow)
+
+	// If the remainder of dividing by the max number of columns in th row is zero,
+	// then we will reduce the position of the raw
+	if n % maxLettersOneRow == 0 {
+		rowNum -= 1
+	}
+
 	result += fmt.Sprintf("%d", rowNum+1)
 	colNum = n - (rowNum * maxLettersOneRow)
+
 	if colNum <= lettersNum {
 		result += letters[colNum]
 	} else {
@@ -58,6 +67,7 @@ func GetSpreadsheetNotation(n uint64) (result string) {
 	return result
 }
 
+// GetSpreadsheetNotation return a string representation of a cell number is spreadsheet notation by unicode table
 func GetSpreadsheetNotation2(n uint64) (result string) {
 	var (
 		rowNum uint64
@@ -65,6 +75,13 @@ func GetSpreadsheetNotation2(n uint64) (result string) {
 	)
 
 	rowNum = n / maxLettersOneRow
+
+	// If the remainder of dividing by the max number of columns in th row is zero,
+	// then we will reduce the position of the raw
+	if n % maxLettersOneRow == 0 {
+		rowNum -= 1
+	}
+
 	result += fmt.Sprintf("%d", rowNum+1)
 	colNum = n - (rowNum * maxLettersOneRow)
 
@@ -78,3 +95,4 @@ func GetSpreadsheetNotation2(n uint64) (result string) {
 
 	return result
 }
+
