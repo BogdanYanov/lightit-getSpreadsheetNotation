@@ -28,3 +28,10 @@ Output: 1AA
 
 Input: 1405
 Output: 3A
+
+# About programm
+
+This program contains two functions that have a different structure, but lead to the same result.
+Function **getSpreadsheetNotation()** contains a map of numbers that associate them with letters. 
+
+Function **getSpreadsheetNotation2()** works with unicode table.
