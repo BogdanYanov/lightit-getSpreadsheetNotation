@@ -2,7 +2,6 @@ package components
 
 import "fmt"
 
-
 const (
 	lettersNum         = 26
 	maxLettersOneRow   = 702
@@ -48,12 +47,11 @@ func GetSpreadsheetNotation(n uint64) (result string) {
 	rowNum = n / maxLettersOneRow
 	result += fmt.Sprintf("%d", rowNum+1)
 	colNum = n - (rowNum * maxLettersOneRow)
-
 	if colNum <= lettersNum {
 		result += letters[colNum]
 	} else {
-		firstLetterNum := colNum / lettersNum
-		lastLetterNum := colNum - firstLetterNum * lettersNum
+		firstLetterNum := (colNum - 1) / lettersNum
+		lastLetterNum := colNum - (firstLetterNum*lettersNum)
 		result += letters[firstLetterNum] + letters[lastLetterNum]
 	}
 
@@ -73,9 +71,9 @@ func GetSpreadsheetNotation2(n uint64) (result string) {
 	if colNum <= lettersNum {
 		result += string(unicodeLetterStart + colNum - 1)
 	} else {
-		firstLetterNum := (colNum / lettersNum) - 1
-		lastLetterNum := colNum - ((firstLetterNum + 1) * lettersNum)
-		result += string(unicodeLetterStart + firstLetterNum) + string(unicodeLetterStart + lastLetterNum)
+		firstLetterNum := ((colNum - 1) / lettersNum) - 1
+		lastLetterNum := (colNum - ((firstLetterNum + 1) * lettersNum)) - 1
+		result += string(unicodeLetterStart+firstLetterNum) + string(unicodeLetterStart+lastLetterNum)
 	}
 
 	return result
