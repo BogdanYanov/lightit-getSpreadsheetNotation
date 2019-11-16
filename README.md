@@ -37,10 +37,11 @@ go run main.go
 ```
 On display you will be see the next message:
 ```
-GetSpreadsheetNotation took 58.502796ms
-GetSpreadsheetNotation2 took 5.168334ms
+Input num -> 702; Result -> 1ZZ
+Input num -> 702; Result -> 1ZZ
+Input num -> 702; Result -> 1ZZ
 ```
-This is the time during which these two functions calculate the cell by the number from 1 to 10000
+It's result for each function for input number 702.
 
 ## Tests
 
@@ -69,8 +70,9 @@ ok      github.com/BogdanYanov/lightit-getSpreadsheetNotation/components        
 goos: linux
 goarch: amd64
 pkg: github.com/BogdanYanov/lightit-getSpreadsheetNotation/components
-BenchmarkGetSpreadsheetNotation-2         290673              4064 ns/op
-BenchmarkGetSpreadsheetNotation2-2       2340072               505 ns/op
+BenchmarkGetSpreadsheetNotation-2         283080              4228 ns/op
+BenchmarkGetSpreadsheetNotation2-2       2278280               504 ns/op
+BenchmarkGetSpreadsheetNotationFor-2     1412169               852 ns/op
 PASS
-ok      github.com/BogdanYanov/lightit-getSpreadsheetNotation/components        3.881s
+ok      github.com/BogdanYanov/lightit-getSpreadsheetNotation/components        5.971s
 ```
